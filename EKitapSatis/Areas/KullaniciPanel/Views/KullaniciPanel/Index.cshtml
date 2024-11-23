@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EKitap.App.Models.ViewModels.Sepet_VM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<h3>Kullanıcı Paneli</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KitapID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KullaniciID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KitapAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fiyat)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KitapID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KullaniciID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KitapAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fiyat)
+                </td>
+                <td>                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

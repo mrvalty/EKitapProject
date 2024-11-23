@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EKitap.App\EKitap.App.csproj" />
+    <ProjectReference Include="..\EKitap.Dom\EKitap.Dom.csproj" />
+    <ProjectReference Include="..\EKitap.Inf\EKitap.Inf.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\KullaniciPanel\Data\" />
+    <Folder Include="Areas\KullaniciPanel\Models\" />
+    <Folder Include="Areas\YonetimPanel\Data\" />
+    <Folder Include="Areas\YonetimPanel\Models\" />
+  </ItemGroup>
+
+</Project>
