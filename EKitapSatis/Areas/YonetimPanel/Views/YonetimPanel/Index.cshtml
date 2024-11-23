@@ -1,10 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_adminLayout.cshtml";
+    Layout = "~/Areas/YonetimPanel/Views/Shared/_adminLayout.cshtml";
 }
-@using EKitapSatis
-@using EKitapSatis.Models
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 
 @model IEnumerable<EKitap.App.Models.DTOs.Kitap.Kitap_DTO>
 
