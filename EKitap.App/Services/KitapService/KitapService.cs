@@ -20,6 +20,7 @@ namespace EKitap.App.Services.KitapService
             _mapper = mapper;
         }
 
+
         public async Task<IEnumerable<Kitap_DTO>> TumUrunlerAsync()
         {
             List<Kitap_DTO> kitaplatDTO = new List<Kitap_DTO>();

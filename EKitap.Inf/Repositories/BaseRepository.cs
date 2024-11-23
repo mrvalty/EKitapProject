@@ -68,10 +68,10 @@ namespace EKitap.Inf.Repositories
 
         public async Task<IEnumerable<TEntity>> TumunuListeleAsync(bool tumu = false)
         {
-            //if (!tumu)
-            //    return await _table.Where(x => x.KayitDurumu != Dom.Enums.KayitDurumu.Silindi).ToListAsync();
+            //    if (!tumu)
+            //        return await _table.Where(x => x.KayitDurumu != Dom.Enums.KayitDurumu.Silindi).ToListAsync();
 
-            //return await _table.ToListAsync();
+            //    return await _table.ToListAsync();
 
             return null;
         }

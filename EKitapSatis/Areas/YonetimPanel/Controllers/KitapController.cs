@@ -33,6 +33,11 @@ namespace EKitapSatis.Areas.YonetimPaneli.Controllers
 
         public async Task<IActionResult> Index()
         {
+            return View();
+        }
+
+        public async Task<IActionResult> KitapListesi()
+        {
             return View(await _kitapService.TumUrunlerAsync());
         }
         public async Task<IActionResult> KitapEkle()
