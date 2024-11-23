@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,7 +8,7 @@
 namespace EKitap.Inf.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDB : Migration
+    public partial class updateDB2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -62,7 +63,7 @@ namespace EKitap.Inf.Migrations
                     KategoriID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     KategoriAdi = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
-                    EklenmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2024, 11, 21, 20, 39, 57, 480, DateTimeKind.Local).AddTicks(2305)),
+                    EklenmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2024, 11, 23, 23, 7, 50, 384, DateTimeKind.Local).AddTicks(1705)),
                     GuncellemeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     SilmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     KayitDurumu = table.Column<int>(type: "int", nullable: false, defaultValue: 1)
@@ -76,12 +77,12 @@ namespace EKitap.Inf.Migrations
                 name: "YayinEvleri",
                 columns: table => new
                 {
-                    YayinEviID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    YayinEviID = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     YayinEviAd = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    YetkiliKisi = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    YayinEviAdres = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    YayinEviMail = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    EklenmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2024, 11, 23, 23, 7, 50, 506, DateTimeKind.Local).AddTicks(6570)),
+                    GuncellemeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: true),
+                    SilmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: true),
+                    KayitDurumu = table.Column<int>(type: "int", nullable: false, defaultValue: 1)
                 },
                 constraints: table =>
                 {
@@ -95,7 +96,7 @@ namespace EKitap.Inf.Migrations
                     YazarID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     YazarAdi = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    EklenmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2024, 11, 21, 20, 39, 57, 552, DateTimeKind.Local).AddTicks(4584)),
+                    EklenmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2024, 11, 23, 23, 7, 50, 507, DateTimeKind.Local).AddTicks(9178)),
                     GuncellemeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     SilmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     KayitDurumu = table.Column<int>(type: "int", nullable: false, defaultValue: 1)
@@ -222,14 +223,14 @@ namespace EKitap.Inf.Migrations
                     Fiyat = table.Column<decimal>(type: "money", nullable: false),
                     StokAdedi = table.Column<int>(type: "int", nullable: false),
                     Aciklama = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true),
-                    EklenmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2024, 11, 21, 20, 39, 57, 480, DateTimeKind.Local).AddTicks(5583)),
+                    EklenmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2024, 11, 23, 23, 7, 50, 384, DateTimeKind.Local).AddTicks(5099)),
                     GuncellemeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     SilmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     KayitDurumu = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
                     KullaniciID = table.Column<int>(type: "int", nullable: false),
                     KategoriID = table.Column<int>(type: "int", nullable: false),
                     YazarID = table.Column<int>(type: "int", nullable: false),
-                    YayinEviID = table.Column<int>(type: "int", nullable: false)
+                    YayinEviID = table.Column<string>(type: "varchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -268,7 +269,7 @@ namespace EKitap.Inf.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     KitapID = table.Column<int>(type: "int", nullable: false),
                     YazarID = table.Column<int>(type: "int", nullable: false),
-                    EklenmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2024, 11, 21, 20, 39, 57, 480, DateTimeKind.Local).AddTicks(9258)),
+                    EklenmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2024, 11, 23, 23, 7, 50, 384, DateTimeKind.Local).AddTicks(9003)),
                     GuncellemeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     SilmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     KayitDurumu = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
@@ -305,7 +306,7 @@ namespace EKitap.Inf.Migrations
                     KitapID = table.Column<int>(type: "int", nullable: true),
                     KullaniciID = table.Column<int>(type: "int", nullable: true),
                     Adet = table.Column<short>(type: "smallint", nullable: false),
-                    EklenmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2024, 11, 21, 20, 39, 57, 552, DateTimeKind.Local).AddTicks(1254)),
+                    EklenmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValue: new DateTime(2024, 11, 23, 23, 7, 50, 505, DateTimeKind.Local).AddTicks(9521)),
                     GuncellemeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     SilmeTarihi = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     KayitDurumu = table.Column<int>(type: "int", nullable: false, defaultValue: 1)
@@ -330,14 +331,14 @@ namespace EKitap.Inf.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "acb679f3-ea1f-4f99-93aa-2cc3b36e0100", "Yonetici", "YONETICI" },
-                    { 2, "f2e1f01a-a888-451e-9d0f-0ff4ac133c05", "Kullanici", "KULLANICI" }
+                    { 1, "d265c286-c1b4-4348-942d-afc4062c79c4", "Yonetici", "YONETICI" },
+                    { 2, "98cb1992-e146-4faa-acf2-32826ab431c0", "Kullanici", "KULLANICI" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Ad", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Soyad", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "Bilge", "961bf0c9-d46f-459b-b685-3ce623a3d378", "bilgeadam@deneme.com", false, false, null, "BILGEADAM@DENEME.COM", "BLGADM", "AQAAAAIAAYagAAAAEI56Gdb01RjjUfDBNuk81nM3Rtl4UQLqbPmUKeLKJqXwSjSf2Fozll7PwDbeJiK2SA==", null, false, "95994cc6-5102-4dbc-9762-b68ab92a5e43", "Adam", false, "blgAdm" });
+                values: new object[] { 1, 0, "Bilge", "dc64e402-5695-41a4-81fb-f7c2a36c8f73", "bilgeadam@deneme.com", false, false, null, "BILGEADAM@DENEME.COM", "BLGADM", "AQAAAAIAAYagAAAAEB0MuC/sJDSYKC0sG6Z1xJC4P/KNItDhXdG9QtPLjv/ISwSw2VaP/dnTXvC3JD4+JQ==", null, false, "e84de9b4-1ddb-4a80-af2f-ce3d240c13d7", "Adam", false, "blgAdm" });
 
             migrationBuilder.InsertData(
                 table: "Kategoriler",
@@ -364,6 +365,28 @@ namespace EKitap.Inf.Migrations
                     { 118, null, "Araştırma-İnceleme", null },
                     { 119, null, "Mizah", null },
                     { 120, null, "Ansiklopedi", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "YayinEvleri",
+                columns: new[] { "YayinEviID", "GuncellemeTarihi", "SilmeTarihi", "YayinEviAd" },
+                values: new object[,]
+                {
+                    { "201", null, null, "Can Yayınları" },
+                    { "202", null, null, "Yapı Kredi Yayınları" },
+                    { "203", null, null, "İletişim Yayınları" },
+                    { "204", null, null, "Everest Yayınları" },
+                    { "205", null, null, "Doğan Kitap" },
+                    { "206", null, null, "Kırmızı Kedi Yayınları" },
+                    { "207", null, null, "Timaş Yayınları" },
+                    { "208", null, null, "Türkiye İş Bankası Kültür Yayınları" },
+                    { "209", null, null, "Pegasus Yayınları" },
+                    { "210", null, null, "Epsilon Yayınları" },
+                    { "211", null, null, "Penguin Random House" },
+                    { "212", null, null, "HarperCollins" },
+                    { "213", null, null, "Simon & Schuster" },
+                    { "214", null, null, "Macmillan Publishers" },
+                    { "215", null, null, "Hachette Livre" }
                 });
 
             migrationBuilder.InsertData(

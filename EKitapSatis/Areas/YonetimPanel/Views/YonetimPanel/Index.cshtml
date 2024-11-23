@@ -1,8 +1,133 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_adminLayout.cshtml";
 }
+@using EKitapSatis
+@using EKitapSatis.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<h1>Index</h1>
+@model IEnumerable<EKitap.App.Models.DTOs.Kitap.Kitap_DTO>
 
+<form asp-controller="Kitap" asp-action="Index">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Tables</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">AnaSayfa</a></li>
+            <li class="breadcrumb-item active">Tables</li>
+        </ol>
+        <div class="card mb-4">
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addKitapEkleModal">Kitap Ekle</a>
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Kitap Adı</th>
+                            <th>Fiyat</th>
+                            <th>Aciklama</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Kitap Adı</th>
+                            <th>Fiyat</th>
+                            <th>Aciklama</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td>KitapAdi</td>
+                            <td>Fiyat</td>
+                            <td>Aciklama</td>
+                        </tr>
+                        @* @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.KitapAdi</td>
+                                <td>@item.Fiyat</td>
+                                <td>@item.Aciklama</td>
+                            </tr>
+                        }
+ *@
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </form>
+
+<!-- Modal -->
+<div class="modal fade" id="addKitapEkleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                Kitap Ekleme Formu
+            </div>
+            <div class="modal-body">
+                <div class="tabs-listing">
+                    <nav>
+                        <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <form asp-controller="Kitap" asp-action="KitapEkle" method="post" enctype="multipart/form-data">
+                            <div class="tab-pane fade active show" id="nav-sign-in" role="tabpanel"
+                                 aria-labelledby="nav-sign-in-tab">
+                                <div class="form-group py-3">
+                                    <label class="mb-2" for="sign-in">Kitap Adi</label>
+                                    <input type="text" minlength="2" name="KitapAdi"
+                                           class="form-control w-100 rounded-3 p-3" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="mb-2" for="sign-in">Kitap Resmi</label>
+                                    <input type="file" name="KitapResmi" for="KitapResmi" class="form-control" />
+                                </div>
+                                <div class="form-group pb-3">
+                                    <label class="mb-2" for="sign-in">Fiyat</label>
+                                    <input type="text" minlength="2" name="Fiyat"
+                                           class="form-control w-100 rounded-3 p-3" required>
+                                </div>
+                                <div class="form-group pb-3">
+                                    <label class="mb-2" for="sign-in">Stok Miktarı</label>
+                                    <input type="text" minlength="2" name="StokAdedi"
+                                           class="form-control w-100 rounded-3 p-3" required>
+                                </div>
+                                <div class="form-group pb-3">
+                                    <label class="mb-2" for="sign-in">Açıklama</label>
+                                    <input type="text" minlength="2" name="Aciklama"
+                                           class="form-control w-100 rounded-3 p-3" required>
+                                </div>
+
+                                <label for="YazarID" class="form-label">Yazar Seçin</label>
+                                <select class="form-select" id="YazarID" name="YazarID">
+                                    <option value="201">Ahmet Hamdi Tanpınar</option>
+                                    <option value="202">Yaşar Kemal</option>
+                                    <option value="203">Orhan Pamuk</option>
+                                </select>
+                                <label for="KategoriID" class="form-label">Kategori Seçin</label>
+                                <select class="form-select" id="KategoriID" name="KategoriID">
+                                    <option value="101">Roman</option>
+                                    <option value="102">Hikaye</option>
+                                    <option value="104">Fantastik</option>
+                                </select>
+                                <label for="YayinEviID" class="form-label">Yayın Evi Seçin</label>
+                                <select class="form-select" id="YayinEviID" name="YayinEviID">
+                                    <option value="201">Can Yayınları</option>
+                                    <option value="202">Yapı Kredi Yayınları</option>
+                                    <option value="203">İletişim Yayınları</option>
+                                </select>
+                                <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Kaydet</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -50,11 +50,13 @@ namespace EKitapSatis.Areas.YonetimPaneli.Controllers
             {
                 KitapEkle_DTO yeniKitap = new KitapEkle_DTO();
                 _mapper.Map(kitap, yeniKitap);
-                yeniKitap.KitapResmi = await DosyaIslemleri.DosyaKaydetAsync(kitap.UrunResmi);
+                yeniKitap.KitapResmi = await DosyaIslemleri.DosyaKaydetAsync(kitap.KitapResmi);
                 yeniKitap.KullaniciID = await _kullaniciService.KullaniciIDGetirAsync(User);
 
                 await _kitapService.UrunEkleAsync(yeniKitap);
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Index", "YonetimPanel", new { area = "YonetimPanel" });
+
             }
 
             KitapEklemeEkrani_VM kitapEkleme_VM = new KitapEklemeEkrani_VM();

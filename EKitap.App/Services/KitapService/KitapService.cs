@@ -58,8 +58,8 @@ namespace EKitap.App.Services.KitapService
 
             int kitapID = await _kitapRepository.EkleAsync(yeniUrun);
 
-            foreach (int id in kitap.KategoriIDleri)
-                await _kitapRepository.EkleAsync(new Kitap { KitapID = kitapID, KategoriID = id });
+
+            await _kitapRepository.EkleAsync(new Kitap { KitapID = kitapID, KategoriID = kitap.KategoriID });
         }
     }
 }

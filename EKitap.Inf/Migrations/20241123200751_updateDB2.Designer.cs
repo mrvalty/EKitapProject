@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EKitap.Inf.Migrations
 {
     [DbContext(typeof(EKitapSatısDB))]
-    [Migration("20241121173958_CreateDB")]
-    partial class CreateDB
+    [Migration("20241123200751_updateDB2")]
+    partial class updateDB2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,31 +27,141 @@ namespace EKitap.Inf.Migrations
 
             modelBuilder.Entity("EKitap.Dom.Models.YayinEvi", b =>
                 {
-                    b.Property<int>("YayinEviID")
+                    b.Property<string>("YayinEviID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("YayinEviID"));
+                    b.Property<DateTime>("EklenmeTarihi")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smalldatetime")
+                        .HasDefaultValue(new DateTime(2024, 11, 23, 23, 7, 50, 506, DateTimeKind.Local).AddTicks(6570));
+
+                    b.Property<DateTime?>("GuncellemeTarihi")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<int>("KayitDurumu")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.Property<DateTime?>("SilmeTarihi")
+                        .HasColumnType("smalldatetime");
 
                     b.Property<string>("YayinEviAd")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("YayinEviAdres")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("YayinEviMail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("YetkiliKisi")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("YayinEviID");
 
                     b.ToTable("YayinEvleri");
+
+                    b.HasData(
+                        new
+                        {
+                            YayinEviID = "201",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "Can Yayınları"
+                        },
+                        new
+                        {
+                            YayinEviID = "202",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "Yapı Kredi Yayınları"
+                        },
+                        new
+                        {
+                            YayinEviID = "203",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "İletişim Yayınları"
+                        },
+                        new
+                        {
+                            YayinEviID = "204",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "Everest Yayınları"
+                        },
+                        new
+                        {
+                            YayinEviID = "205",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "Doğan Kitap"
+                        },
+                        new
+                        {
+                            YayinEviID = "206",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "Kırmızı Kedi Yayınları"
+                        },
+                        new
+                        {
+                            YayinEviID = "207",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "Timaş Yayınları"
+                        },
+                        new
+                        {
+                            YayinEviID = "208",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "Türkiye İş Bankası Kültür Yayınları"
+                        },
+                        new
+                        {
+                            YayinEviID = "209",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "Pegasus Yayınları"
+                        },
+                        new
+                        {
+                            YayinEviID = "210",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "Epsilon Yayınları"
+                        },
+                        new
+                        {
+                            YayinEviID = "211",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "Penguin Random House"
+                        },
+                        new
+                        {
+                            YayinEviID = "212",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "HarperCollins"
+                        },
+                        new
+                        {
+                            YayinEviID = "213",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "Simon & Schuster"
+                        },
+                        new
+                        {
+                            YayinEviID = "214",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "Macmillan Publishers"
+                        },
+                        new
+                        {
+                            YayinEviID = "215",
+                            EklenmeTarihi = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KayitDurumu = 0,
+                            YayinEviAd = "Hachette Livre"
+                        });
                 });
 
             modelBuilder.Entity("EKitap.Dom.Models.Yazar", b =>
@@ -65,7 +175,7 @@ namespace EKitap.Inf.Migrations
                     b.Property<DateTime>("EklenmeTarihi")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2024, 11, 21, 20, 39, 57, 552, DateTimeKind.Local).AddTicks(4584));
+                        .HasDefaultValue(new DateTime(2024, 11, 23, 23, 7, 50, 507, DateTimeKind.Local).AddTicks(9178));
 
                     b.Property<DateTime?>("GuncellemeTarihi")
                         .HasColumnType("smalldatetime");
@@ -283,7 +393,7 @@ namespace EKitap.Inf.Migrations
                     b.Property<DateTime>("EklenmeTarihi")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2024, 11, 21, 20, 39, 57, 480, DateTimeKind.Local).AddTicks(2305));
+                        .HasDefaultValue(new DateTime(2024, 11, 23, 23, 7, 50, 384, DateTimeKind.Local).AddTicks(1705));
 
                     b.Property<DateTime?>("GuncellemeTarihi")
                         .HasColumnType("smalldatetime");
@@ -463,7 +573,7 @@ namespace EKitap.Inf.Migrations
                     b.Property<DateTime>("EklenmeTarihi")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2024, 11, 21, 20, 39, 57, 480, DateTimeKind.Local).AddTicks(5583));
+                        .HasDefaultValue(new DateTime(2024, 11, 23, 23, 7, 50, 384, DateTimeKind.Local).AddTicks(5099));
 
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("money");
@@ -499,8 +609,9 @@ namespace EKitap.Inf.Migrations
                     b.Property<int>("StokAdedi")
                         .HasColumnType("int");
 
-                    b.Property<int>("YayinEviID")
-                        .HasColumnType("int");
+                    b.Property<string>("YayinEviID")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("YazarID")
                         .HasColumnType("int");
@@ -529,7 +640,7 @@ namespace EKitap.Inf.Migrations
                     b.Property<DateTime>("EklenmeTarihi")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2024, 11, 21, 20, 39, 57, 480, DateTimeKind.Local).AddTicks(9258));
+                        .HasDefaultValue(new DateTime(2024, 11, 23, 23, 7, 50, 384, DateTimeKind.Local).AddTicks(9003));
 
                     b.Property<DateTime?>("GuncellemeTarihi")
                         .HasColumnType("smalldatetime");
@@ -649,15 +760,15 @@ namespace EKitap.Inf.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Ad = "Bilge",
-                            ConcurrencyStamp = "961bf0c9-d46f-459b-b685-3ce623a3d378",
+                            ConcurrencyStamp = "dc64e402-5695-41a4-81fb-f7c2a36c8f73",
                             Email = "bilgeadam@deneme.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BILGEADAM@DENEME.COM",
                             NormalizedUserName = "BLGADM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEI56Gdb01RjjUfDBNuk81nM3Rtl4UQLqbPmUKeLKJqXwSjSf2Fozll7PwDbeJiK2SA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB0MuC/sJDSYKC0sG6Z1xJC4P/KNItDhXdG9QtPLjv/ISwSw2VaP/dnTXvC3JD4+JQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "95994cc6-5102-4dbc-9762-b68ab92a5e43",
+                            SecurityStamp = "e84de9b4-1ddb-4a80-af2f-ce3d240c13d7",
                             Soyad = "Adam",
                             TwoFactorEnabled = false,
                             UserName = "blgAdm"
@@ -697,14 +808,14 @@ namespace EKitap.Inf.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "acb679f3-ea1f-4f99-93aa-2cc3b36e0100",
+                            ConcurrencyStamp = "d265c286-c1b4-4348-942d-afc4062c79c4",
                             Name = "Yonetici",
                             NormalizedName = "YONETICI"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "f2e1f01a-a888-451e-9d0f-0ff4ac133c05",
+                            ConcurrencyStamp = "98cb1992-e146-4faa-acf2-32826ab431c0",
                             Name = "Kullanici",
                             NormalizedName = "KULLANICI"
                         });
@@ -724,7 +835,7 @@ namespace EKitap.Inf.Migrations
                     b.Property<DateTime>("EklenmeTarihi")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smalldatetime")
-                        .HasDefaultValue(new DateTime(2024, 11, 21, 20, 39, 57, 552, DateTimeKind.Local).AddTicks(1254));
+                        .HasDefaultValue(new DateTime(2024, 11, 23, 23, 7, 50, 505, DateTimeKind.Local).AddTicks(9521));
 
                     b.Property<DateTime?>("GuncellemeTarihi")
                         .HasColumnType("smalldatetime");

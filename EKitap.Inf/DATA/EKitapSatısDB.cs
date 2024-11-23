@@ -23,6 +23,8 @@ namespace EKitap.Inf.DATA
         public DbSet<KitapYazar> KitapYazarlar { get; set; }
         public DbSet<Sepet> Sepetler { get; set; }
         public DbSet<YayinEvi> YayinEvleri { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -53,6 +55,8 @@ namespace EKitap.Inf.DATA
        .WithMany(k => k.KitapYazar)
        .HasForeignKey(ky => ky.KitapID)
        .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<YayinEvi>().HasMany(x => x.Kitaplar).WithOne(x => x.YayinEvi).HasForeignKey(x => x.YayinEviID).OnDelete(DeleteBehavior.Cascade);
 
             //builder.Entity<KitapYazar>()
             //    .HasOne(ky => ky.Yazar)
