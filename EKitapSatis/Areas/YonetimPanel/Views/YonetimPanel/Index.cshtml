@@ -1,19 +1,8 @@
-﻿<h1>Yönetim Paneli</h1>
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
 
-<table class="table table-striped table-primary">
-    <tr>
-        <td>
-            <a asp-area="YonetimPaneli" asp-controller="Kitap" asp-action="Index">Kitaplar</a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a asp-area="YonetimPaneli" asp-controller="Kullanici" asp-action="Index">Kullanıcılar</a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a asp-area="YonetimPaneli" asp-controller="Rapor" asp-action="Index">Raporlar</a>
-        </td>
-    </tr>
-</table>
+<h1>Index</h1>
+
