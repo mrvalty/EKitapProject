@@ -60,19 +60,28 @@ namespace EKitapSatis.Controllers
             {
                 var user = await _kullaniciService.KullaniciGirisAsync(login);
                 bool isAdmin = false;
+                bool isKullanici = false;
                 if (user != null)
                 {
 
                     await _signInManager.SignInAsync(user, false);
                     isAdmin = User.IsInRole("Yonetici");
+                    isKullanici = User.IsInRole("Kullanici");
+                    if (isAdmin)
+                    {
+                        return RedirectToAction("Index", "YonetimPanel", new { area = "YonetimPanel" });
 
+                    }
+                    else if (isKullanici)
+                    {
+                        return RedirectToAction("Anasayfa", "KullaniciPanel", new { area = "KullaniciPanel" });
+                    }
                 }
-                //return RedirectToAction("IndexHome", "Home");
+                return RedirectToAction("IndexHome", "Home");
 
-                return RedirectToAction("Anasayfa", "KullaniciPanel", new { area = "KullaniciPanel" });
             }
-
             return View();
+
         }
 
         [HttpPost]

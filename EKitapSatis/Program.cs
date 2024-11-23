@@ -62,9 +62,9 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapAreaControllerRoute(
-       name: "AdminArea",
-       areaName: "AdminArea",
-       pattern: "AdminArea/{controller=Login}/{action=LoginForm}/{id?}"
+       name: "YonetimPanel",
+       areaName: "YonetimPanel",
+       pattern: "YonetimPanel/{controller=YonetimPanel}/{action=Index}/{id?}"
        );
 
     endpoints.MapAreaControllerRoute(
