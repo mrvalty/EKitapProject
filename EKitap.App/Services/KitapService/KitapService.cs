@@ -3,6 +3,7 @@ using EKitap.App.Models.DTOs.Kitap;
 using EKitap.App.Models.ViewModels;
 using EKitap.Dom.Repositories;
 using EKitap.Domain.Models;
+using EKitap.Inf.DATA;
 using Microsoft.EntityFrameworkCore;
 
 namespace EKitap.App.Services.KitapService
@@ -13,13 +14,29 @@ namespace EKitap.App.Services.KitapService
         private readonly IKitapYazarRepository _kitapYazarRepository;
         private readonly IMapper _mapper;
 
-        public KitapService(IKitapRepository kitapRepository, IKitapYazarRepository kitapYazarRepository, IMapper mapper)
+        EKitapSatısDB _context = new();
+
+        public KitapService(IKitapRepository kitapRepository, IKitapYazarRepository kitapYazarRepository, IMapper mapper, EKitapSatısDB context)
         {
             _kitapRepository = kitapRepository;
             _kitapYazarRepository = kitapYazarRepository;
             _mapper = mapper;
         }
 
+        public async Task<List<Kitap_DTO>> KitapListesi()
+        {
+            var result = (from kitap in _context.Kitaplar
+                          select new Kitap_DTO
+                          {
+                              KitapAdi = kitap.KitapAdi,
+                              Aciklama = kitap.Aciklama,
+                              Fiyat = kitap.Fiyat,
+                              YazarAdi = kitap.Yazar.YazarAdi,
+                              YayinEvi = kitap.YayinEvi.YayinEviAd,
+                              KitapResmi = kitap.KitapResmi,
+                          }).ToList();
+            return result;
+        }
 
         public async Task<IEnumerable<Kitap_DTO>> TumUrunlerAsync()
         {
@@ -60,7 +77,7 @@ namespace EKitap.App.Services.KitapService
             int kitapID = await _kitapRepository.EkleAsync(yeniUrun);
 
 
-            await _kitapRepository.EkleAsync(new Kitap { KitapID = kitapID, KategoriID = kitap.KategoriID });
+            //await _kitapRepository.EkleAsync(new Kitap { KitapID = kitapID, KategoriID = kitap.KategoriID });
         }
     }
 }

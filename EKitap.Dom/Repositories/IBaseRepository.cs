@@ -12,7 +12,6 @@ namespace EKitap.Dom.Repositories
         Task<TEntity> IDyeGoreBulAsync(int id);
         Task<IEnumerable<TEntity>> TumunuListeleAsync(bool tumu = false);
 
-        List<TEntity> GetList(Expression<Func<TEntity, bool>>? filter = null);
 
         //Daha sonra eklenecekler...
 

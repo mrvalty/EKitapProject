@@ -6,6 +6,8 @@
         public string KitapAdi { get; set; }
         public string Aciklama { get; set; }
         public string KitapResmi { get; set; }
+        public string YazarAdi { get; set; }
+        public string YayinEvi { get; set; }
         public decimal Fiyat { get; set; }
     }
 }

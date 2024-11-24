@@ -36,9 +36,10 @@ namespace EKitapSatis.Areas.YonetimPaneli.Controllers
             return View();
         }
 
+        [HttpGet]
         public async Task<IActionResult> KitapListesi()
         {
-            return View(await _kitapService.TumUrunlerAsync());
+            return View(await _kitapService.KitapListesi());
         }
         public async Task<IActionResult> KitapEkle()
         {
@@ -60,7 +61,7 @@ namespace EKitapSatis.Areas.YonetimPaneli.Controllers
 
                 await _kitapService.UrunEkleAsync(yeniKitap);
 
-                return RedirectToAction("Index", "YonetimPanel", new { area = "YonetimPanel" });
+                return RedirectToAction("KitapListesi", "Kitap", new { area = "YonetimPanel" });
 
             }
 

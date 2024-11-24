@@ -75,15 +75,5 @@ namespace EKitap.Inf.Repositories
 
             return null;
         }
-
-        public List<TEntity> GetList(Expression<Func<TEntity, bool>>? filter = null)
-        {
-            if (filter == null)
-            {
-                return _context.Set<TEntity>().ToList();
-            }
-            return _context.Set<TEntity>().Where(filter).ToList();
-
-        }
     }
 }

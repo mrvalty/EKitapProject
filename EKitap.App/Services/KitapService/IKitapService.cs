@@ -8,5 +8,7 @@ namespace EKitap.App.Services.KitapService
         Task<IEnumerable<Kitap_DTO>> TumUrunlerAsync();
         Task UrunEkleAsync(KitapEkle_DTO kitap);
         Task<KitapDetay_VM> UrunDetayGetirAsync(int id);
+
+        Task<List<Kitap_DTO>> KitapListesi();
     }
 }

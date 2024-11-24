@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "KitapListesi";
     Layout = "~/Areas/YonetimPanel/Views/Shared/_adminLayout.cshtml";
 }
@@ -7,41 +6,56 @@
 
 <form>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Tables</h1>
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><a href="index.html">AnaSayfa</a></li>
-            <li class="breadcrumb-item active">Tables</li>
-        </ol>
+        <h1 class="mt-4">Kitap Listesi</h1>
         <div class="card mb-4">
         </div>
         <div class="card mb-4">
             <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addKitapEkleModal">Kitap Ekle</a>
+                <div class="d-flex justify-content-end">
+                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addKitapEkleModal">
+                        <i class="fas fa-plus me-1"></i>
+                        Kitap Ekle
+                    </a>
+                </div>
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
+                            <th>Resim</th>
                             <th>Kitap Adı</th>
                             <th>Fiyat</th>
                             <th>Aciklama</th>
+                            <th>Yazar</th>
+                            <th>Yayın Evi</th>
+                            <th>İşlemler</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
+                            <th>Resim</th>
                             <th>Kitap Adı</th>
                             <th>Fiyat</th>
                             <th>Aciklama</th>
+                            <th>Yazar</th>
+                            <th>Yayın Evi</th>
+                            <th>İşlemler</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach (var item in Model)
                         {
                             <tr>
+                                <td><img class="img-responsive" src="/KitapResimleri/@item.KitapResmi" width="100" height="100" alt=""></td>
                                 <td>@item.KitapAdi</td>
                                 <td>@item.Fiyat</td>
                                 <td>@item.Aciklama</td>
+                                <td>@item.YazarAdi</td>
+                                <td>@item.YayinEvi</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Güncelle</button>
+                                    <button class="btn btn-danger btn-sm">Sil</button>
+                                </td>
                             </tr>
                         }
 
