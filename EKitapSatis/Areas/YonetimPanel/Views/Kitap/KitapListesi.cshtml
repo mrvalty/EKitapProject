@@ -4,6 +4,12 @@
 }
 @model IEnumerable<EKitap.App.Models.DTOs.Kitap.Kitap_DTO>
 
+<style>
+    .yazi {
+        font-weight: bold
+    }
+</style>
+<script src="~/lib/jquery/dist/jquery.js"></script>
 <form>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Kitap Listesi</h1>
@@ -12,7 +18,7 @@
         <div class="card mb-4">
             <div class="card-header">
                 <div class="d-flex justify-content-end">
-                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addKitapEkleModal">
+                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kitapEkleModal">
                         <i class="fas fa-plus me-1"></i>
                         Kitap Ekle
                     </a>
@@ -53,12 +59,12 @@
                                 <td>@item.YazarAdi</td>
                                 <td>@item.YayinEvi</td>
                                 <td>
-                                    <button class="btn btn-primary btn-sm">Güncelle</button>
-                                    <button class="btn btn-danger btn-sm">Sil</button>
+                                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateKitapModal" data-id="@item.KitapID">Güncelle</a>
+
+                                    <a class="btn btn-danger mt-3" id="btn1">Sil</a>
                                 </td>
                             </tr>
                         }
-
                     </tbody>
                 </table>
             </div>
@@ -66,8 +72,8 @@
     </div>
 </form>
 
-<!-- Modal -->
-<div class="modal fade" id="addKitapEkleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+<!--Kitap Ekle Modal -->
+<div class="modal fade" id="kitapEkleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -110,22 +116,28 @@
                                 </div>
 
                                 <label for="YazarID" class="form-label">Yazar Seçin</label>
-                                <select class="form-select" id="YazarID" name="YazarID">
-                                    <option value="201">Ahmet Hamdi Tanpınar</option>
+                                <select class="form-select" id="YazarSelect" name="YazarID">
+                                    <option value="">Yazar Seçin</option>
+
+                                    @* <option value="201">Ahmet Hamdi Tanpınar</option>
                                     <option value="202">Yaşar Kemal</option>
-                                    <option value="203">Orhan Pamuk</option>
+                                    <option value="203">Orhan Pamuk</option> *@
                                 </select>
                                 <label for="KategoriID" class="form-label">Kategori Seçin</label>
-                                <select class="form-select" id="KategoriID" name="KategoriID">
-                                    <option value="101">Roman</option>
+                                <select class="form-select" id="KategoriSelect" name="KategoriID">
+                                    <option value="">Kategori Seçin</option>
+
+                                    @* <option value="101">Roman</option>
                                     <option value="102">Hikaye</option>
-                                    <option value="104">Fantastik</option>
+                                    <option value="104">Fantastik</option> *@
                                 </select>
                                 <label for="YayinEviID" class="form-label">Yayın Evi Seçin</label>
-                                <select class="form-select" id="YayinEviID" name="YayinEviID">
-                                    <option value="201">Can Yayınları</option>
+                                <select class="form-select" id="YayinEviSelect" name="YayinEviID">
+                                    <option value="">Yayın Evi Seçin</option>
+
+                                    @* <option value="201">Can Yayınları</option>
                                     <option value="202">Yapı Kredi Yayınları</option>
-                                    <option value="203">İletişim Yayınları</option>
+                                    <option value="203">İletişim Yayınları</option> *@
                                 </select>
                                 <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Kaydet</button>
                             </div>
@@ -136,5 +148,257 @@
         </div>
     </div>
 </div>
+
+<!--Kitap Güncelle Modal -->
+<div class="modal fade" id="updateKitapModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                Kitap Güncelleme Formu
+            </div>
+            <div class="modal-body">
+                <div class="tabs-listing">
+                    <nav>
+                        <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <form enctype="multipart/form-data">
+                            <div class="tab-pane fade active show" id="nav-sign-in" role="tabpanel"
+                                 aria-labelledby="nav-sign-in-tab">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <img src="" width="100" height="100" alt="" id="imgId"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="mb-2 yazi" for="sign-in">Kitap Resmi</label>
+                                            <input type="file" name="KitapResmi" for="KitapResmi" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label class="mb-2 yazi" for="sign-in">Kitap Adi</label>
+                                            <input type="text" minlength="2" name="KitapAdi" id="KitapAdi"
+                                                   class="form-control w-100 rounded-3" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group pb-3">
+                                            <label class="mb-2 yazi" for="sign-in">Fiyat</label>
+                                            <input type="text" minlength="2" name="Fiyat" id="Fiyat"
+                                                   class="form-control w-100 rounded-3" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-group pb-3">
+                                            <label class="mb-2 yazi" for="sign-in">Stok Miktarı</label>
+                                            <input type="text" minlength="2" name="StokAdedi" id="StokAdedi"
+                                                   class="form-control w-100 rounded-3" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group pb-3">
+                                            <label class="mb-2 yazi" for="sign-in">Açıklama</label>
+                                            <textarea class="form-control" id="Aciklama" rows="3" name="Aciklama"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label for="YazarID" class="form-label yazi">Yazar Seçin</label>
+                                        <select class="form-select" id="YazarSelect" name="YazarID">
+                                            <option value="">Yazar Seçin</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label for="KategoriID" class="form-label yazi">Kategori Seçin</label>
+                                        <select class="form-select" id="KategoriSelect" name="KategoriID">
+                                            <option value="">Kategori Seçin</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label for="YayinEviID" class="form-label yazi">Yayın Evi Seçin</label>
+                                        <select class="form-select" id="YayinEviSelect" name="YayinEviID">
+                                            <option value="">Yayın Evi Seçin</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Kaydet</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const yazarListModal = document.getElementById('kitapEkleModal');
+
+        yazarListModal.addEventListener('show.bs.modal', () => {
+
+            const yazarSelect = document.getElementById('YazarSelect');
+            const kategoriSelect = document.getElementById('KategoriSelect');
+            const yayinEviSelect = document.getElementById('YayinEviSelect');
+            // yazarSelect.innerHTML = '<option value="">-- Select a Yazar --</option>';
+
+            fetch('YazarListesi')
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(yazar => {
+                        const option = document.createElement('option');
+                        option.value = yazar.yazarID;
+                        option.textContent = yazar.yazarAdi;
+                        yazarSelect.appendChild(option);
+                    });
+                })
+
+            fetch('KategoriListesi')
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(kategori => {
+                        const option = document.createElement('option');
+                        option.value = kategori.kategoriID;
+                        option.textContent = kategori.kategoriAdi;
+                        kategoriSelect.appendChild(option);
+                    });
+                })
+
+            fetch('YayinEviListesi')
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(yayin => {
+                        const option = document.createElement('option');
+                        option.value = yayin.yayinEviID;
+                        option.textContent = yayin.yayinEviAdi;
+                        yayinEviSelect.appendChild(option);
+                    });
+                })
+        })
+    })
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const guncelleModal = document.getElementById('updateKitapModal');
+        guncelleModal.addEventListener('show.bs.modal', (event) => {
+
+            const button = event.relatedTarget;
+            const kitapId = button.getAttribute('data-id');
+
+            const yazarSelect = document.getElementById('YazarSelect');
+            const kategoriSelect = document.getElementById('KategoriSelect');
+            const yayinEviSelect = document.getElementById('YayinEviSelect');
+
+            fetch('YazarListesi')
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(yazar => {
+                        const option = document.createElement('option');
+                        option.value = yazar.yazarID;
+                        option.textContent = yazar.yazarAdi;
+                        yazarSelect.appendChild(option);
+                    });
+                })
+
+            fetch('KategoriListesi')
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(kategori => {
+                        const option = document.createElement('option');
+                        option.value = kategori.kategoriID;
+                        option.textContent = kategori.kategoriAdi;
+                        kategoriSelect.appendChild(option);
+                    });
+                })
+
+            fetch('YayinEviListesi')
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(yayin => {
+                        const option = document.createElement('option');
+                        option.value = yayin.yayinEviID;
+                        option.textContent = yayin.yayinEviAdi;
+                        yayinEviSelect.appendChild(option);
+                    });
+                })
+
+            fetch(`/getKitapId/${kitapId}`)
+                .then(res =>  res.json()) // JSON olarak yanıtı dön
+                .then(data => {
+                    // Gelen veriyi modal içindeki alanlara yerleştirin
+                    const option = document.createElement('option');
+                    document.getElementById('imgId').src = "/KitapResimleri/" + data.kitapResmi;
+                    document.getElementById('KitapAdi').value = data.kitapAdi;
+                    document.getElementById('Fiyat').value = data.fiyat;
+                    document.getElementById('StokAdedi').value = data.stokAdedi;
+                    document.getElementById('Aciklama').value = data.aciklama;
+                    yazarSelect.value = data.yazarID;
+                    kategoriSelect.value = data.kategoriID;
+                    yayinEviSelect.value = data.yayinEviID;
+                    // option.value = data.yazarID;
+                    // option.textContent = data.yazarAdi;
+                    //yazarSelect.appendChild(option);
+
+                })
+                .catch(error => {
+                    console.error('Hata:', error);
+                });
+
+            console.log('Kitap ID:', kitapId);
+
+        })
+
+    })
+</script>
+
+<script>
+    // document.addEventListener('DOMContentLoaded', () => {
+    //     const deleteButton = document.getElementById('btn1');
+    //     deleteButton.addEventListener('click', () => {
+    //         alert("deneme");
+    //     })
+    // })
+    document.addEventListener('DOMContentLoaded', () => {
+        const deleteButton = document.getElementById('btn1');
+
+        deleteButton.addEventListener('click', () => {
+            // Swal.fire(
+            //     'Good job!',
+            //     'You clicked the button!',
+            //     'success'
+            // )
+            Swal.fire({
+                title: 'Silmek istediğinize emin misiniz?',
+                text: 'Bu işlem geri alınamaz!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet, sil!',
+                cancelButtonText: 'İptal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Silindi!',
+                        'Kaydınız başarıyla silindi.',
+                        'success'
+                    );
+                }
+            });
+        });
+    });
+</script>
 
 

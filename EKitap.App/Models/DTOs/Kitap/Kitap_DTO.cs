@@ -1,4 +1,6 @@
-﻿namespace EKitap.App.Models.DTOs.Kitap
+﻿using EKitap.App.Models.DTOs.Yazar;
+
+namespace EKitap.App.Models.DTOs.Kitap
 {
     public class Kitap_DTO
     {
@@ -9,5 +11,7 @@
         public string YazarAdi { get; set; }
         public string YayinEvi { get; set; }
         public decimal Fiyat { get; set; }
+
+        public List<Yazar_DTO> YazarListesi { get; set; }
     }
 }

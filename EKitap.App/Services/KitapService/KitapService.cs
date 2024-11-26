@@ -4,7 +4,6 @@ using EKitap.App.Models.ViewModels;
 using EKitap.Dom.Repositories;
 using EKitap.Domain.Models;
 using EKitap.Inf.DATA;
-using Microsoft.EntityFrameworkCore;
 
 namespace EKitap.App.Services.KitapService
 {
@@ -23,17 +22,24 @@ namespace EKitap.App.Services.KitapService
             _mapper = mapper;
         }
 
+        public async Task KitapGuncelle(KitapEkle_DTO kitap)
+        {
+
+            throw new NotImplementedException();
+        }
+
         public async Task<List<Kitap_DTO>> KitapListesi()
         {
             var result = (from kitap in _context.Kitaplar
                           select new Kitap_DTO
                           {
+                              KitapID = kitap.KitapID,
                               KitapAdi = kitap.KitapAdi,
                               Aciklama = kitap.Aciklama,
                               Fiyat = kitap.Fiyat,
                               YazarAdi = kitap.Yazar.YazarAdi,
                               YayinEvi = kitap.YayinEvi.YayinEviAd,
-                              KitapResmi = kitap.KitapResmi,
+                              KitapResmi = kitap.KitapResmi
                           }).ToList();
             return result;
         }
@@ -57,12 +63,15 @@ namespace EKitap.App.Services.KitapService
                 Aciklama = x.Aciklama,
                 StokAdedi = x.StokAdedi,
                 KitapResmi = x.KitapResmi,
+                YazarID = x.Yazar.YazarID,
                 YazarAdi = x.Yazar.YazarAdi,
+                KategoriID = x.Kategori.KategoriID,
+                YayinEviAdi = x.YayinEvi.YayinEviAd,
                 //Kategoriler = x.Kategoriler.Select(x=>x.KategoriAdi).ToList()
             },
                 x => x.KitapID == id,
-                null,
-                x => x.Include(y => y.Yazar).Include(y => y.Kategori).ThenInclude(y => y.KategoriAdi)
+                null, null
+                //x => x.Include(y => y.Yazar).Include(y => y.Kategori).ThenInclude(y => y.KategoriAdi)
                 );
 
             KitapDetay_VM urunDetay = result.SingleOrDefault();

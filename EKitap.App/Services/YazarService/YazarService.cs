@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using EKitap.App.Models.DTOs.Yazar;
 using EKitap.Dom.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EKitap.Inf.DATA;
 
 namespace EKitap.App.Services.YazarService
 {
@@ -13,6 +9,8 @@ namespace EKitap.App.Services.YazarService
     {
         private readonly IYazarRepository _yazarRepository;
         private readonly IMapper _mapper;
+
+        EKitapSatısDB context = new();
 
         public YazarService(IYazarRepository yazarRepository, IMapper mapper)
         {
@@ -26,6 +24,18 @@ namespace EKitap.App.Services.YazarService
             var yazarlar = await _yazarRepository.TumunuListeleAsync();
             _mapper.Map(yazarlar, yazarlarDTO);
             return yazarlarDTO;
+        }
+
+        public async Task<List<Yazar_DTO>> YazarListele()
+        {
+            var result = (from yazar in context.Yazarlar
+                          select new Yazar_DTO
+                          {
+                              YazarID = yazar.YazarID,
+                              YazarAdi = yazar.YazarAdi,
+                          }).ToList();
+
+            return result;
         }
     }
 }

@@ -3,6 +3,7 @@ using EKitap.App.Models.DTOs.Kitap;
 using EKitap.App.Services.KategoriService;
 using EKitap.App.Services.KitapService;
 using EKitap.App.Services.KullaniciService;
+using EKitap.App.Services.YayinEviService;
 using EKitap.App.Services.YazarService;
 using EKitapSatis.Models.ViewModels;
 using EKitapSatis.Utilities;
@@ -22,18 +23,16 @@ namespace EKitapSatis.Areas.YonetimPaneli.Controllers
         private readonly IKullaniciService _kullaniciService;
         private readonly IMapper _mapper;
 
-        public KitapController(IKategoriService kategoriService, IYazarService yazarService, IKitapService kitapService, IKullaniciService kullaniciService, IMapper mapper)
+        private readonly IYayinEviService _yayinEviService;
+
+        public KitapController(IKategoriService kategoriService, IYazarService yazarService, IKitapService kitapService, IKullaniciService kullaniciService, IMapper mapper, IYayinEviService yayinEviService)
         {
             _kategoriService = kategoriService;
             _yazarService = yazarService;
             _kitapService = kitapService;
             _kullaniciService = kullaniciService;
             _mapper = mapper;
-        }
-
-        public async Task<IActionResult> Index()
-        {
-            return View();
+            _yayinEviService = yayinEviService;
         }
 
         [HttpGet]
@@ -71,5 +70,37 @@ namespace EKitapSatis.Areas.YonetimPaneli.Controllers
 
             return View(kitapEkleme_VM);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> YazarListesi()
+        {
+            var result = await _yazarService.YazarListele();
+            //ViewBag.YazarList = result;
+            return Json(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> KategoriListesi()
+        {
+            var result = await _kategoriService.KategoriListele();
+            //ViewBag.YazarList = result;
+            return Json(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> YayinEviListesi()
+        {
+            var result = await _yayinEviService.YayinEviListele();
+            //ViewBag.YazarList = result;
+            return Json(result);
+        }
+
+        [HttpGet("getKitapId/{id}")]
+        public async Task<IActionResult> KitapById(int id)
+        {
+            var result = await _kitapService.UrunDetayGetirAsync(id);
+            return Json(result);
+        }
+
     }
 }

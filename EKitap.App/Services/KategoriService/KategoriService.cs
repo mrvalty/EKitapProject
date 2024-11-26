@@ -2,6 +2,7 @@
 using EKitap.App.Models.DTOs.Kategori;
 using EKitap.Dom.Repositories;
 using EKitap.Domain.Models;
+using EKitap.Inf.DATA;
 
 namespace EKitap.App.Services.KategoriService
 {
@@ -9,6 +10,7 @@ namespace EKitap.App.Services.KategoriService
     {
         private readonly IKategoriRepository _kategoriRepository;
         private readonly IMapper _mapper;
+        EKitapSatısDB _context = new();
 
         public KategoriService(IKategoriRepository kategoriRepository, IMapper mapper)
         {
@@ -22,6 +24,7 @@ namespace EKitap.App.Services.KategoriService
             return kategoriler;
         }
 
+
         public async Task<IEnumerable<Kategori_DTO>> TumKategorilerAsync()
         {
             List<Kategori_DTO> kategorilerDTO = new List<Kategori_DTO>();
@@ -29,5 +32,18 @@ namespace EKitap.App.Services.KategoriService
             _mapper.Map(kategoriler, kategorilerDTO);
             return kategorilerDTO;
         }
+
+        public async Task<List<Kategori_DTO>> KategoriListele()
+        {
+            var result = (from kategori in _context.Kategoriler
+                          select new Kategori_DTO
+                          {
+                              KategoriID = kategori.KategoriID,
+                              KategoriAdi = kategori.KategoriAdi,
+                          }).ToList();
+
+            return result;
+        }
+
     }
 }

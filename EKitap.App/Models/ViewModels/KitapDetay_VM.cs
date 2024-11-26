@@ -9,6 +9,10 @@
         public int StokAdedi { get; set; }
         public string Aciklama { get; set; }
         public string YazarAdi { get; set; }
+        public int YazarID { get; set; }
+        public string KategoriAdi { get; set; }
+        public int KategoriID { get; set; }
+        public string YayinEviAdi { get; set; }
         public List<string> Kategoriler { get; set; }
     }
 }

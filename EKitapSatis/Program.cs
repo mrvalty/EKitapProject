@@ -3,6 +3,7 @@ using EKitap.App.Services.KategoriService;
 using EKitap.App.Services.KitapService;
 using EKitap.App.Services.KullaniciService;
 using EKitap.App.Services.SepetService;
+using EKitap.App.Services.YayinEviService;
 using EKitap.App.Services.YazarService;
 using EKitap.Dom.Repositories;
 using EKitap.Domain.Models;
@@ -38,6 +39,8 @@ builder.Services.AddTransient<ISepetRepository, SepetRepository>();
 builder.Services.AddTransient<IYazarService, YazarService>();
 builder.Services.AddTransient<IYazarRepository, YazarRepository>();
 builder.Services.AddTransient<IKitapYazarRepository, KitapYazarRepository>();
+builder.Services.AddTransient<IYayinEviService, YayinEviService>();
+
 
 
 builder.Services.AddTransient<IMapper, Mapper>();
