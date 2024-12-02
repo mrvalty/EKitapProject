@@ -40,10 +40,18 @@ namespace EKitap.App.Services.KategoriService
                           {
                               KategoriID = kategori.KategoriID,
                               KategoriAdi = kategori.KategoriAdi,
+                              EklenmeTarihi = kategori.EklenmeTarihi,
+                              GuncellemeTarihi = kategori.GuncellemeTarihi,
+                              SilmeTarihi = kategori.SilmeTarihi,
+                              KayitDurumu = kategori.KayitDurumu
                           }).ToList();
 
             return result;
         }
 
+        public async Task KategoriSil(int id)
+        {
+            await _kategoriRepository.SilAsync(id);
+        }
     }
 }

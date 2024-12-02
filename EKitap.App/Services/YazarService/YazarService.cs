@@ -33,6 +33,8 @@ namespace EKitap.App.Services.YazarService
                           {
                               YazarID = yazar.YazarID,
                               YazarAdi = yazar.YazarAdi,
+                              EklenmeTarihi = yazar.EklenmeTarihi,
+                              GuncellemeTarihi = yazar.GuncellemeTarihi
                           }).ToList();
 
             return result;

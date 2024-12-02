@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EKitap.Dom.Enums;
 
 namespace EKitap.App.Models.DTOs.Kategori
 {
@@ -10,5 +6,9 @@ namespace EKitap.App.Models.DTOs.Kategori
     {
         public int KategoriID { get; set; }
         public string KategoriAdi { get; set; }
+        public KayitDurumu KayitDurumu { get; set; }
+        public DateTime? EklenmeTarihi { get; set; }
+        public DateTime? GuncellemeTarihi { get; set; }
+        public DateTime? SilmeTarihi { get; set; }
     }
 }

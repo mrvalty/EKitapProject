@@ -22,10 +22,21 @@ namespace EKitap.App.Services.KitapService
             _mapper = mapper;
         }
 
-        public async Task KitapGuncelle(KitapEkle_DTO kitap)
+        public async Task KitapGuncelle(Kitap kitap)
         {
+            var kitapInfo = _context.Kitaplar.Where(x => x.KitapID == kitap.KitapID).FirstOrDefault();
+            if (kitapInfo != null)
+            {
+                kitapInfo.KitapAdi = kitap.KitapAdi;
+                kitapInfo.Aciklama = kitap.Aciklama;
+                kitapInfo.Fiyat = kitap.Fiyat;
+                kitapInfo.StokAdedi = kitap.StokAdedi;
+                if (kitap.KitapResmi != null) { kitapInfo.KitapResmi = kitap.KitapResmi; }
+                kitapInfo.GuncellemeTarihi = DateTime.Now;
+                kitapInfo.KayitDurumu = Dom.Enums.KayitDurumu.Guncellendi;
+            }
 
-            throw new NotImplementedException();
+            await _kitapRepository.GuncelleAsync(kitapInfo);
         }
 
         public async Task<List<Kitap_DTO>> KitapListesi()
@@ -39,7 +50,11 @@ namespace EKitap.App.Services.KitapService
                               Fiyat = kitap.Fiyat,
                               YazarAdi = kitap.Yazar.YazarAdi,
                               YayinEvi = kitap.YayinEvi.YayinEviAd,
-                              KitapResmi = kitap.KitapResmi
+                              KitapResmi = kitap.KitapResmi,
+                              EklenmeTarihi = kitap.EklenmeTarihi,
+                              GuncellemeTarihi = kitap.GuncellemeTarihi,
+                              SilmeTarihi = kitap.SilmeTarihi,
+                              KayitDurumu = kitap.KayitDurumu,
                           }).ToList();
             return result;
         }

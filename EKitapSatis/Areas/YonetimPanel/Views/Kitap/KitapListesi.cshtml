@@ -34,6 +34,10 @@
                             <th>Aciklama</th>
                             <th>Yazar</th>
                             <th>Yayın Evi</th>
+                            <th>Eklenme Tarihi</th>
+                            <th>Güncelleme Tarihi</th>
+                            <th>Silme Tarihi</th>
+                            <th>Kayıt Durumu</th>
                             <th>İşlemler</th>
                         </tr>
                     </thead>
@@ -45,6 +49,10 @@
                             <th>Aciklama</th>
                             <th>Yazar</th>
                             <th>Yayın Evi</th>
+                            <th>Eklenme Tarihi</th>
+                            <th>Güncelleme Tarihi</th>
+                            <th>Silme Tarihi</th>
+                            <th>Kayıt Durumu</th>
                             <th>İşlemler</th>
                         </tr>
                     </tfoot>
@@ -58,10 +66,14 @@
                                 <td>@item.Aciklama</td>
                                 <td>@item.YazarAdi</td>
                                 <td>@item.YayinEvi</td>
+                                <td>@item.EklenmeTarihi</td>
+                                <td>@item.GuncellemeTarihi</td>
+                                <td>@item.SilmeTarihi</td>
+                                <td>@item.KayitDurumu</td>
                                 <td>
-                                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateKitapModal" data-id="@item.KitapID">Güncelle</a>
+                                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateKitapModal" data-id="@item.KitapID">Güncelle</a>
 
-                                    <a class="btn btn-danger mt-3" id="btn1">Sil</a>
+                                    <a class="btn btn-danger mt-3 btn-sm sil-btn" id="btn1">Sil</a>
                                 </td>
                             </tr>
                         }
@@ -114,7 +126,7 @@
                                     <input type="text" minlength="2" name="Aciklama"
                                            class="form-control w-100 rounded-3 p-3" required>
                                 </div>
-
+                                @* Kitaplarda Yazar Kategori ve Yayın evi listeleme *@
                                 <label for="YazarID" class="form-label">Yazar Seçin</label>
                                 <select class="form-select" id="YazarSelect" name="YazarID">
                                     <option value="">Yazar Seçin</option>
@@ -164,17 +176,21 @@
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <form enctype="multipart/form-data">
+                        <form asp-controller="Kitap" asp-action="KitapGuncelle" enctype="multipart/form-data">
+
+                            <input type="text" minlength="2" name="KitapID" id="KitapID"
+                                   class="form-control w-100 rounded-3" style="display:none">
+
                             <div class="tab-pane fade active show" id="nav-sign-in" role="tabpanel"
                                  aria-labelledby="nav-sign-in-tab">
                                 <div class="row">
                                     <div class="col-md-5">
-                                        <img src="" width="100" height="100" alt="" id="imgId"/>
+                                        <img src="" width="100" height="100" alt="" id="imgId" />
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label class="mb-2 yazi" for="sign-in">Kitap Resmi</label>
-                                            <input type="file" name="KitapResmi" for="KitapResmi" class="form-control" />
+                                            <input type="file" name="KitapResmi" for="KitapResmi" id="KitapResmi" class="form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -335,7 +351,7 @@
                 })
 
             fetch(`/getKitapId/${kitapId}`)
-                .then(res =>  res.json()) // JSON olarak yanıtı dön
+                .then(res => res.json()) // JSON olarak yanıtı dön
                 .then(data => {
                     // Gelen veriyi modal içindeki alanlara yerleştirin
                     const option = document.createElement('option');
@@ -344,6 +360,8 @@
                     document.getElementById('Fiyat').value = data.fiyat;
                     document.getElementById('StokAdedi').value = data.stokAdedi;
                     document.getElementById('Aciklama').value = data.aciklama;
+                    document.getElementById('KitapID').value = data.kitapID;
+                    document.getElementById('KitapResmi').value = data.kitapResmi;
                     yazarSelect.value = data.yazarID;
                     kategoriSelect.value = data.kategoriID;
                     yayinEviSelect.value = data.yayinEviID;
@@ -364,21 +382,8 @@
 </script>
 
 <script>
-    // document.addEventListener('DOMContentLoaded', () => {
-    //     const deleteButton = document.getElementById('btn1');
-    //     deleteButton.addEventListener('click', () => {
-    //         alert("deneme");
-    //     })
-    // })
-    document.addEventListener('DOMContentLoaded', () => {
-        const deleteButton = document.getElementById('btn1');
-
-        deleteButton.addEventListener('click', () => {
-            // Swal.fire(
-            //     'Good job!',
-            //     'You clicked the button!',
-            //     'success'
-            // )
+    $(document).ready(function () {
+        $('#datatablesSimple tbody').on('click', '.sil-btn', function () {
             Swal.fire({
                 title: 'Silmek istediğinize emin misiniz?',
                 text: 'Bu işlem geri alınamaz!',

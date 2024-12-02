@@ -5,6 +5,7 @@ using EKitap.App.Services.KitapService;
 using EKitap.App.Services.KullaniciService;
 using EKitap.App.Services.YayinEviService;
 using EKitap.App.Services.YazarService;
+using EKitap.Domain.Models;
 using EKitapSatis.Models.ViewModels;
 using EKitapSatis.Utilities;
 using Microsoft.AspNetCore.Authorization;
@@ -100,6 +101,14 @@ namespace EKitapSatis.Areas.YonetimPaneli.Controllers
         {
             var result = await _kitapService.UrunDetayGetirAsync(id);
             return Json(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> KitapGuncelle(Kitap kitap)
+        {
+            var result = _kitapService.KitapGuncelle(kitap);
+
+            return RedirectToAction("KitapListesi", "Kitap", new { area = "YonetimPanel" });
         }
 
     }

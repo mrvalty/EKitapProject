@@ -10,6 +10,8 @@
     <title>Admin Panel</title>
    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
    <link href="/admintemp/css/styles.css" rel="stylesheet" />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 </head>
 <body class="sb-nav-fixed">
@@ -60,7 +62,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Kullanıcılar
                         </a>
-                        <a class="nav-link" href="tables.html">
+                        <a class="nav-link" asp-controller="Yazar" asp-action="YazarListesi">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Yazarlar
                         </a>                        

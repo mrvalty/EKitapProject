@@ -8,5 +8,7 @@ namespace EKitap.App.Services.KategoriService
         Task<IEnumerable<Kategori_DTO>> TumKategorilerAsync();
         Task<List<Kategori>> GetAll();
         Task<List<Kategori_DTO>> KategoriListele();
+
+        Task KategoriSil(int id);
     }
 }
