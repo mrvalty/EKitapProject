@@ -176,7 +176,7 @@
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <form asp-controller="Kitap" asp-action="KitapGuncelle" enctype="multipart/form-data">
+                        <form asp-controller="Kitap" asp-action="KitapGuncelle" method="post" enctype="multipart/form-data">
 
                             <input type="text" minlength="2" name="KitapID" id="KitapID"
                                    class="form-control w-100 rounded-3" style="display:none">
@@ -190,7 +190,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label class="mb-2 yazi" for="sign-in">Kitap Resmi</label>
-                                            <input type="file" name="KitapResmi" for="KitapResmi" id="KitapResmi" class="form-control" />
+                                            <input type="file" name="KitapResmiGuncel" for="KitapResmiGuncel" id="fileInput" onchange="degis()" class="form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -361,7 +361,7 @@
                     document.getElementById('StokAdedi').value = data.stokAdedi;
                     document.getElementById('Aciklama').value = data.aciklama;
                     document.getElementById('KitapID').value = data.kitapID;
-                    document.getElementById('KitapResmi').value = data.kitapResmi;
+                    //document.getElementById('KitapResmi').value = data.kitapResmi;
                     yazarSelect.value = data.yazarID;
                     kategoriSelect.value = data.kategoriID;
                     yayinEviSelect.value = data.yayinEviID;
@@ -404,6 +404,45 @@
             });
         });
     });
+</script>
+
+<script>
+
+    function degis() {
+
+       const input = document.getElementById("fileInput");
+
+       if (input.files && input.files[0])
+       {
+           const reader = new FileReader();
+           reader.onload = function (e)
+           {
+               const img = document.getElementById("imgId");
+               img.src = e.target.result;
+           };
+
+           //Dosyayı okuma
+           reader.readAsDataURL(input.files[0]);
+       }
+    }
+
+    // $(document).ready(function () {
+    //     $('#fileInput').on("change", function () {
+
+    //         const file = this.files[0]; // Seçilen dosya
+    //         if (file) {
+    //             const reader = new FileReader();
+
+    //             // Dosya yüklendiğinde çalışacak
+    //             reader.onload = function (e) {
+    //                 $("#imgId").attr("src", e.target.result); // <img>'in src özelliğini ayarla
+    //             };
+
+    //             //Dosyayı okuma
+    //             reader.readAsDataURL(file);
+    //         }
+    //     })
+    // })
 </script>
 
 

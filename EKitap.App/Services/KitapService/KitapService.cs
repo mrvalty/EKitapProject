@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EKitap.App.Models.DTOs.Kitap;
 using EKitap.App.Models.ViewModels;
+using EKitap.App.Services.Extensions;
 using EKitap.Dom.Repositories;
 using EKitap.Domain.Models;
 using EKitap.Inf.DATA;
@@ -22,21 +23,23 @@ namespace EKitap.App.Services.KitapService
             _mapper = mapper;
         }
 
-        public async Task KitapGuncelle(Kitap kitap)
+        public async Task KitapGuncelle(KitapEkle_DTO kitap)
         {
             var kitapInfo = _context.Kitaplar.Where(x => x.KitapID == kitap.KitapID).FirstOrDefault();
             if (kitapInfo != null)
             {
+                _mapper.Map(kitapInfo, kitap);
+
                 kitapInfo.KitapAdi = kitap.KitapAdi;
                 kitapInfo.Aciklama = kitap.Aciklama;
                 kitapInfo.Fiyat = kitap.Fiyat;
                 kitapInfo.StokAdedi = kitap.StokAdedi;
-                if (kitap.KitapResmi != null) { kitapInfo.KitapResmi = kitap.KitapResmi; }
+                if (kitap.KitapResmiGuncel != null) { kitapInfo.KitapResmi = await FileExtensions.DosyaKaydetAsync(kitap.KitapResmiGuncel); }
                 kitapInfo.GuncellemeTarihi = DateTime.Now;
                 kitapInfo.KayitDurumu = Dom.Enums.KayitDurumu.Guncellendi;
             }
 
-            await _kitapRepository.GuncelleAsync(kitapInfo);
+            _kitapRepository.GuncelleAsync(kitapInfo);
         }
 
         public async Task<List<Kitap_DTO>> KitapListesi()
