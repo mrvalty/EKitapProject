@@ -53,3 +53,22 @@
         });
     });
 });
+
+function degis()
+{
+
+    const input = document.getElementById("fileInput");
+
+    if (input.files && input.files[0])
+    {
+        const reader = new FileReader();
+        reader.onload = function (e)
+        {
+            const img = document.getElementById("imgId");
+            img.src = e.target.result;
+        };
+
+        //Dosyayı okuma
+        reader.readAsDataURL(input.files[0]);
+    }
+ }
