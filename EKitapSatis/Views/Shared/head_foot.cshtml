@@ -98,15 +98,15 @@
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                     <a href="" class="text-decoration-none d-block d-lg-none">
-                        <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                        <span class="h1 text-uppercase text-dark bg-light px-2">E</span>
+                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Kitap</span>
                     </a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
 
-                        <div class="navbar-nav py-0 d-none d-lg-block" style="margin-left:85%;">
+                        <div class="navbar-nav py-0 d-none d-lg-block mr-2" style="margin-left:auto">
                             <a href="#" class="btn px-0">
                                 <i class="fas fa-user" style="color:orange" data-toggle="modal" data-target="#exampleModal">Giriş</i>
                             </a>
@@ -115,7 +115,7 @@
                             <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                             </a> *@
                         </div>
-                        <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+                        <div class="navbar-nav py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
                                 <i class="fas fa-cart-plus" style="color:orange">Sepetim</i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
@@ -238,11 +238,6 @@
                     <nav>
                         <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
                             <h3>Hoşgeldiniz</h3>
-                            @*  <button class="nav-link text-capitalize" id="nav-register-tab" data-bs-toggle="tab"
-                            data-target="#nav-register" type="button" role="tab" aria-controls="nav-register"
-                            aria-selected="false">
-                            Kayıt Ol
-                            </button> *@
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
@@ -251,44 +246,18 @@
                                  aria-labelledby="nav-sign-in-tab">
                                 <div class="form-group py-3">
                                     <label class="mb-2" for="sign-in">Email*</label>
-                                    <input type="text" minlength="2" name="KullaniciAdiVeyaEPosta" placeholder="Your Username"
+                                    <input type="text" minlength="2" name="KullaniciAdiVeyaEPosta" placeholder="Email Giriniz"
                                            class="form-control w-100 rounded-3 p-3" required>
                                 </div>
                                 <div class="form-group pb-3">
                                     <label class="mb-2" for="sign-in">Şifre *</label>
-                                    <input type="password" minlength="2" name="Sifre" placeholder="Your Password"
+                                    <input type="password" minlength="2" name="Sifre" placeholder="Şifre Giriniz"
                                            class="form-control w-100 rounded-3 p-3" required>
                                 </div>
                                 <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Giriş Yap</button>
                                 <div class="go d-flex justify-content-center"><span>Hesabınız Yoksa?</span><a asp-controller="Kullanici" asp-action="KullaniciEkle">Kayıt Ol</a></div>
                             </div>
                         </form>
-                        @* <form>
-                        <div class="tab-pane fade" id="nav-register" role="tabpanel"
-                        aria-labelledby="nav-register-tab">
-                        <div class="form-group py-3">
-                        <label class="mb-2" for="register">Email*</label>
-                        <input type="text" minlength="2" name="username" placeholder="Email"
-                        class="form-control w-100 rounded-3 p-3" required>
-                        </div>
-                        <div class="form-group pb-3">
-                        <label class="mb-2" for="sign-in">Şifre *</label>
-                        <input type="password" minlength="2" name="password" placeholder="Şifre"
-                        class="form-control w-100 rounded-3 p-3" required>
-                        </div>
-                        <label class="py-3">
-                        <input type="checkbox" required="" class="d-inline">
-                        <span class="label-body">
-                        I agree to the <a href="#" class="fw-bold">
-                        Privacy
-                        Policy
-                        </a>
-                        </span>
-                        </label>
-                        <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Kayıt Ol</button>
-                        </div>
-                        </form> *@
-
                     </div>
                 </div>
             </div>
