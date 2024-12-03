@@ -73,7 +73,7 @@
                                 <td>
                                     <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateKitapModal" data-id="@item.KitapID">Güncelle</a>
 
-                                    <a class="btn btn-danger mt-3 btn-sm sil-btn" id="btn1">Sil</a>
+                                    <a class="btn btn-danger mt-3 btn-sm sil-btn" id="btn1" data-id="@item.KitapID">Sil</a>
                                 </td>
                             </tr>
                         }
@@ -190,7 +190,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label class="mb-2 yazi" for="sign-in">Kitap Resmi</label>
-                                            <input type="file" name="KitapResmiGuncel" for="KitapResmiGuncel" id="fileInput" onchange="degis()" class="form-control" />
+                                            <input type="file" name="KitapResmiFile" for="KitapResmiFile" id="fileInput" onchange="degis()" class="form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -257,6 +257,26 @@
         </div>
     </div>
 </div>
+
+<div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="toastMessage" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            @* <div class="toast-header">
+            <button type="button" class="btn-close text-sm-end" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div> *@
+            <div class="toast-body" style="background-color:orange;">
+                @if (TempData.Count > 0)
+                {
+                    <div class="alert alert-info" role="alert">
+                        @TempData["GuncellemeBasarili"]
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -380,6 +400,35 @@
 
     })
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var messageGuncelleme = '@TempData["GuncellemeBasarili"]';
+
+        if (messageGuncelleme) {
+            var toastElement = document.getElementById('toastMessage');
+            toastElement.querySelector('.toast-body').textContent = messageGuncelleme;
+
+            var toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        }
+        // else if (messageSifre) {
+        //     var toastElement = document.getElementById('toastMessage');
+        //     toastElement.querySelector('.toast-body').textContent = messageSifre;
+
+        //     var toast = new bootstrap.Toast(toastElement);
+        //     toast.show();
+        // }
+        // else if (messageRole) {
+        //     var toastElement = document.getElementById('toastMessage');
+        //     toastElement.querySelector('.toast-body').textContent = messageRole;
+
+        //     var toast = new bootstrap.Toast(toastElement);
+        //     toast.show();
+        // }
+    });
+</script>
+<script src="~/admintemp/js/admintempkitap.js"></script>
 
 
 

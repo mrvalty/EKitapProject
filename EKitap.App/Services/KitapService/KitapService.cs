@@ -28,17 +28,17 @@ namespace EKitap.App.Services.KitapService
             var kitapInfo = _context.Kitaplar.Where(x => x.KitapID == kitap.KitapID).FirstOrDefault();
             if (kitapInfo != null)
             {
-                _mapper.Map(kitapInfo, kitap);
+
 
                 kitapInfo.KitapAdi = kitap.KitapAdi;
                 kitapInfo.Aciklama = kitap.Aciklama;
                 kitapInfo.Fiyat = kitap.Fiyat;
                 kitapInfo.StokAdedi = kitap.StokAdedi;
-                if (kitap.KitapResmiGuncel != null) { kitapInfo.KitapResmi = await FileExtensions.DosyaKaydetAsync(kitap.KitapResmiGuncel); }
+                if (kitap.KitapResmiFile != null) { kitapInfo.KitapResmi = await FileExtensions.DosyaKaydetAsync(kitap.KitapResmiFile); }
                 kitapInfo.GuncellemeTarihi = DateTime.Now;
                 kitapInfo.KayitDurumu = Dom.Enums.KayitDurumu.Guncellendi;
             }
-
+            _mapper.Map(kitapInfo, kitap);
             _kitapRepository.GuncelleAsync(kitapInfo);
         }
 
@@ -60,6 +60,11 @@ namespace EKitap.App.Services.KitapService
                               KayitDurumu = kitap.KayitDurumu,
                           }).ToList();
             return result;
+        }
+
+        public async Task KitapSil(int id)
+        {
+            _kitapRepository.SilAsync(id);
         }
 
         public async Task<IEnumerable<Kitap_DTO>> TumUrunlerAsync()

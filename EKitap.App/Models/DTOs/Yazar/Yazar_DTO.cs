@@ -6,5 +6,6 @@
         public string YazarAdi { get; set; }
         public DateTime EklenmeTarihi { get; set; }
         public DateTime? GuncellemeTarihi { get; set; }
+        public DateTime? SilmeTarihi { get; set; }
     }
 }

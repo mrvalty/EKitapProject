@@ -11,5 +11,7 @@ namespace EKitap.App.Services.KitapService
         Task<KitapDetay_VM> UrunDetayGetirAsync(int id);
 
         Task<List<Kitap_DTO>> KitapListesi();
+
+        Task KitapSil(int id);
     }
 }

@@ -1,0 +1,139 @@
+﻿@using EKitap.App.Models.DTOs.Kullanici
+
+@{
+    ViewData["Title"] = "KullaniciListesi";
+    Layout = "~/Areas/YonetimPanel/Views/Shared/_adminLayout.cshtml";
+}
+@model IEnumerable<KullaniciListe_DTO>
+
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Kullanici Listesi</h1>
+    <div class="card mb-4">
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-end">
+                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kullaniciEkleModal">
+                    <i class="fas fa-plus me-1"></i>
+                    Kullanici Ekle
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Kullanıcı Adı</th>
+                        <th>Ad Soyad</th>
+                        <th>E-Mail</th>
+                        <th>Telefon</th>
+                        <th>İl</th>
+                        <th>İlçe</th>
+                        <th>Adres</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Kullanıcı Adı</th>
+                        <th>Ad Soyad</th>
+                        <th>E-Mail</th>
+                        <th>Telefon</th>
+                        <th>İl</th>
+                        <th>İlçe</th>
+                        <th>Adres</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.KullaniciID</td>
+                            <td>@item.KullaniciAdi</td>
+                            <td>@item.AdSoyad</td>
+                            <td>@item.Eposta</td>
+                            <td>@item.Telefon</td>
+                            <td>@item.Il</td>
+                            <td>@item.Ilce</td>
+                            <td>@item.Adres</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detayKullaniciModal" onclick="detay(@item.KullaniciID)">Detay</a>
+                                <a class="btn btn-danger btn-sm sil-btn"id="delete">Sil</a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="detayKullaniciModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                Kullanıcı İletişim Bilgileri Detay
+            </div>
+            <div class="modal-body">
+                <div class="tabs-listing">
+                    <nav>
+                        <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                      <form>
+                            <div class="tab-pane fade active show" id="nav-sign-in" role="tabpanel"
+                                 aria-labelledby="nav-sign-in-tab">
+                                <div class="">
+                                    <table id="modalTable" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Kullanıcı Adı</th>
+                                                <th>Ad Soyad</th>
+                                                <th>E-Mail</th>
+                                                <th>Telefon</th>
+                                                <th>İl</th>
+                                                <th>İlçe</th>
+                                                <th>Adres</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           @*  @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@item.KullaniciID</td>
+                                                    <td>@item.KullaniciAdi</td>
+                                                    <td>@item.AdSoyad</td>
+                                                    <td>@item.Eposta</td>
+                                                    <td>@item.Telefon</td>
+                                                    <td>@item.Il</td>
+                                                    <td>@item.Ilce</td>
+                                                    <td>@item.Adres</td>
+                                                    <td>
+                                                        <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detayKullaniciModal">Detay</a>
+                                                        <a class="btn btn-danger btn-sm sil-btn" id="delete">Sil</a>
+                                                    </td>
+                                                </tr>
+                                            } *@
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Tamam</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/admintemp/js/adminTempKullanici.js"></script>

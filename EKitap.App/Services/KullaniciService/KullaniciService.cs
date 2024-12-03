@@ -1,5 +1,6 @@
 ﻿using EKitap.App.Models.DTOs.Kullanici;
 using EKitap.Domain.Models;
+using EKitap.Inf.DATA;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
@@ -8,10 +9,13 @@ namespace EKitap.App.Services.KullaniciService
     public class KullaniciService : IKullaniciService
     {
         private readonly UserManager<Kullanici> _userManager;
+        EKitapSatısDB _context = new();
 
-        public KullaniciService(UserManager<Kullanici> userManager)
+
+        public KullaniciService(UserManager<Kullanici> userManager, EKitapSatısDB context)
         {
             _userManager = userManager;
+            _context = context;
         }
 
         public async Task<Kullanici> KullaniciGirisAsync(KullaniciGiris_DTO login)
@@ -36,6 +40,7 @@ namespace EKitap.App.Services.KullaniciService
             return int.Parse(await _userManager.GetUserIdAsync(await _userManager.GetUserAsync(claims)));
         }
 
+
         public Task UyeSilAsync(int id)
         {
             throw new NotImplementedException();
@@ -54,6 +59,26 @@ namespace EKitap.App.Services.KullaniciService
             await _userManager.AddToRoleAsync(yeniUye, "Kullanici");
 
             return result.Succeeded;
+        }
+
+        public async Task<List<KullaniciListe_DTO>> KullaniciListesi()
+        {
+            var result = (from iletisim in _context.IletisimBilgileri
+                          join kullanici in _context.Users on iletisim.KullaniciID equals kullanici.Id
+                          select new KullaniciListe_DTO()
+                          {
+                              AdSoyad = kullanici.Ad + " " + kullanici.Soyad,
+                              KullaniciAdi = kullanici.UserName,
+                              Eposta = kullanici.Email,
+                              Telefon = iletisim.TelefonNo,
+                              Il = iletisim.Il,
+                              Ilce = iletisim.Ilce,
+                              Adres = iletisim.Adres,
+                              KullaniciID = kullanici.Id,
+                              IletisimID = iletisim.IletisimBilgiID
+                          }).OrderBy(x => x.KullaniciAdi).ToList();
+
+            return result;
         }
     }
 }

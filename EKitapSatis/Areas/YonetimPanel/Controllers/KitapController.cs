@@ -106,8 +106,16 @@ namespace EKitapSatis.Areas.YonetimPaneli.Controllers
         public async Task<IActionResult> KitapGuncelle(KitapEkle_DTO kitap)
         {
             var result = _kitapService.KitapGuncelle(kitap);
-
+            TempData["GuncellemeBasarili"] = "Guncelleme Islemi Basarili";
             return RedirectToAction("KitapListesi", "Kitap", new { area = "YonetimPanel" });
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> KitapSil(int id)
+        {
+            var result = _kitapService.KitapSil(id);
+
+            return View(result);
         }
 
     }

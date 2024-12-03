@@ -1,11 +1,6 @@
 ﻿using EKitap.App.Models.DTOs.Kullanici;
 using EKitap.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EKitap.App.Services.KullaniciService
 {
@@ -15,6 +10,8 @@ namespace EKitap.App.Services.KullaniciService
         Task UyeSilAsync(int id);
 
         Task<Kullanici> KullaniciGirisAsync(KullaniciGiris_DTO login);
+
+        Task<List<KullaniciListe_DTO>> KullaniciListesi();
 
         Task<int> KullaniciIDGetirAsync(ClaimsPrincipal claims);
     }

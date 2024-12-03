@@ -51,7 +51,7 @@ namespace EKitap.App.Services.KategoriService
 
         public async Task KategoriSil(int id)
         {
-            await _kategoriRepository.SilAsync(id);
+            _kategoriRepository.SilAsync(id);
         }
     }
 }

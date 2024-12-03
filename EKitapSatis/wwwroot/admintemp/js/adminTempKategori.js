@@ -17,10 +17,10 @@
 
                 $.ajax({
                     type: "DELETE",
-                    url: `KitapSil/${id}`,
+                    url: `KategoriSil/${id}`,
                     data: JSON.stringify
                         ({
-                            KitapID: id
+                            KategoriID: id
                         }),
 
                     contentType: "application/json; charset=utf-8",
@@ -36,7 +36,7 @@
                         //);
                     },
                     success: function (msg) {
-                       
+
                     },
                     complete: function () {
                         Swal.fire(
@@ -44,31 +44,12 @@
                             'Kaydınız başarıyla silindi.',
                             'success'
                         ).then(() => {
-                            window.location.href = 'KitapListesi'; // Controller'daki "KitapListesi" action'ına yönlendirme
+                            window.location.href = 'KategoriListesi'; // Controller'daki "KitapListesi" action'ına yönlendirme
                         });
                     }
                 });
-                
+
             }
         });
     });
 });
-
-function degis()
-{
-
-    const input = document.getElementById("fileInput");
-
-    if (input.files && input.files[0])
-    {
-        const reader = new FileReader();
-        reader.onload = function (e)
-        {
-            const img = document.getElementById("imgId");
-            img.src = e.target.result;
-        };
-
-        //Dosyayı okuma
-        reader.readAsDataURL(input.files[0]);
-    }
- }

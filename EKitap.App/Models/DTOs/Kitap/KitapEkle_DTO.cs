@@ -7,7 +7,7 @@ namespace EKitap.App.Models.DTOs.Kitap
         public int KitapID { get; set; }
         public string KitapAdi { get; set; }
         public string KitapResmi { get; set; }
-        public IFormFile? KitapResmiGuncel { get; set; }
+        public IFormFile? KitapResmiFile { get; set; }
 
         public decimal Fiyat { get; set; }
         public int StokAdedi { get; set; }
