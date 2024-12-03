@@ -31,3 +31,6 @@
     });
 
 }
+function tamam() {
+    $('#detayKullaniciModal').modal('hide');
+}
