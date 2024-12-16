@@ -49,7 +49,7 @@ namespace EKitap.Inf.Repositories
             entity.GuncellemeTarihi = DateTime.Now;
             entity.KayitDurumu = Dom.Enums.KayitDurumu.Guncellendi;
             _table.Update(entity);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<TEntity> IDyeGoreBulAsync(int id)
@@ -63,7 +63,7 @@ namespace EKitap.Inf.Repositories
             entity.SilmeTarihi = DateTime.Now;
             entity.KayitDurumu = Dom.Enums.KayitDurumu.Silindi;
             _table.Update(entity);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<TEntity>> TumunuListeleAsync(bool tumu = false)

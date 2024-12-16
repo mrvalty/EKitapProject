@@ -61,18 +61,25 @@ namespace EKitapSatis.Controllers
                 var user = await _kullaniciService.KullaniciGirisAsync(login);
                 bool isAdmin = false;
                 bool isKullanici = false;
+                bool sifre = false;
+
                 if (user != null)
                 {
+
+                    PasswordHasher<Kullanici> hasher = new PasswordHasher<Kullanici>();
+                    var sifreDecode = hasher.VerifyHashedPassword(user, user.PasswordHash, login.Sifre);
+
+                    if (sifreDecode == PasswordVerificationResult.Success) sifre = true;
 
                     await _signInManager.SignInAsync(user, false);
                     isAdmin = User.IsInRole("Yonetici");
                     isKullanici = User.IsInRole("Kullanici");
-                    if (isAdmin)
+                    if (isAdmin && sifre)
                     {
                         return RedirectToAction("Index", "YonetimPanel", new { area = "YonetimPanel" });
 
                     }
-                    else if (isKullanici)
+                    else if (isKullanici && sifre)
                     {
                         return RedirectToAction("Anasayfa", "KullaniciPanel", new { area = "KullaniciPanel" });
                     }

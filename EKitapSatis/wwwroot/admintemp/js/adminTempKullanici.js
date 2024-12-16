@@ -32,5 +32,5 @@
 
 }
 function tamam() {
-    $('#detayKullaniciModal').modal('hide');
+    $('#detayKullaniciModal').modal('hide'); // Modal kapat
 }
