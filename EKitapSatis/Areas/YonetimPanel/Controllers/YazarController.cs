@@ -31,4 +31,12 @@ public class YazarController : Controller
     {
         return View();
     }
+
+    [HttpDelete]
+    public async Task<IActionResult> YazarSil(int id)
+    {
+        var result = _yazarService.YazarSil(id);
+
+        return View(result);
+    }
 }

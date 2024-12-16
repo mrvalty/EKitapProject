@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EKitap.App.Models.DTOs.Kategori;
+using EKitap.Dom.Enums;
 using EKitap.Dom.Repositories;
 using EKitap.Domain.Models;
 using EKitap.Inf.DATA;
@@ -51,7 +52,16 @@ namespace EKitap.App.Services.KategoriService
 
         public async Task KategoriSil(int id)
         {
-            _kategoriRepository.SilAsync(id);
+
+            Kategori kategori = _context.Kategoriler.Where(x => x.KategoriID == id).First();
+            if (kategori != null)
+            {
+                kategori.SilmeTarihi = DateTime.Now;
+                kategori.KayitDurumu = KayitDurumu.Silindi;
+
+                _context.SaveChanges();
+            }
+            //_kategoriRepository.SilAsync(id);
         }
     }
 }

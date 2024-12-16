@@ -27,8 +27,8 @@
                             <th>#</th>
                             <th>Yazar Adı</th>
                             <th>Eklenme Tarihi</th>
-                            <th>Güncelleme Tarihi</th>
                             <th>Silme Tarihi</th>
+                            <th>Kayit Durumu</th>
                             <th>İşlemler</th>
                         </tr>
                     </thead>
@@ -37,8 +37,8 @@
                             <th>#</th>
                             <th>Yazar Adı</th>
                             <th>Eklenme Tarihi</th>
-                            <th>Güncelleme Tarihi</th>
                             <th>Silme Tarihi</th>
+                            <th>Kayit Durumu</th>
                             <th>İşlemler</th>
                         </tr>
                     </tfoot>
@@ -49,11 +49,11 @@
                                 <td>@item.YazarID</td>
                                 <td>@item.YazarAdi</td>
                                 <td>@item.EklenmeTarihi</td>
-                                <td>@item.GuncellemeTarihi</td>
                                 <td>@item.SilmeTarihi</td>
+                                <td>@item.KayitDurumu</td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateKitapModal">Güncelle</a>
-                                    <a class="btn btn-danger btn-sm sil-btn" id="btn1">Sil</a>
+@*                                     <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateKitapModal">Güncelle</a>
+ *@                                    <a class="btn btn-danger btn-sm sil-btn" data-id="@item.YazarID" id="btn1">Sil</a>
                                 </td>
                             </tr>
                         }
@@ -96,29 +96,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('#datatablesSimple tbody').on('click', '.sil-btn', function () {
-            Swal.fire({
-                title: 'Silmek istediğinize emin misiniz?',
-                text: 'Bu işlem geri alınamaz!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Evet, sil!',
-                cancelButtonText: 'İptal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        'Silindi!',
-                        'Kaydınız başarıyla silindi.',
-                        'success'
-                    );
-                }
-            });
-        });
-    });
-</script>
+<script src="~/admintemp/js/adminTempYazar.js"></script>
 

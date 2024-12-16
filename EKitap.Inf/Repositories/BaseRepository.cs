@@ -63,7 +63,7 @@ namespace EKitap.Inf.Repositories
             entity.SilmeTarihi = DateTime.Now;
             entity.KayitDurumu = Dom.Enums.KayitDurumu.Silindi;
             _table.Update(entity);
-            await _context.SaveChangesAsync();
+            _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<TEntity>> TumunuListeleAsync(bool tumu = false)
