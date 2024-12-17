@@ -10,5 +10,7 @@ namespace EKitap.App.Services.KategoriService
         Task<List<Kategori_DTO>> KategoriListele();
 
         Task KategoriSil(int id);
+
+        Task<List<KategoriIdListKitap_DTO>> KategoriyeGoreKitap(int id);
     }
 }

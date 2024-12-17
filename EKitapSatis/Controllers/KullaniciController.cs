@@ -42,7 +42,8 @@ namespace EKitapSatis.Controllers
             }
 
             if (EklemeIslemiBasarilimi)
-                return RedirectToAction("UyeGiris");
+                //return RedirectToAction("UyeGiris");
+                return RedirectToAction("IndexHome", "Home");
 
             ModelState.AddModelError("Hata", "Kullanıcı oluşturulamadi...");
             return View();

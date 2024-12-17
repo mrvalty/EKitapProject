@@ -38,7 +38,7 @@ namespace EKitap.App.Services.YazarService
                               EklenmeTarihi = yazar.EklenmeTarihi,
                               KayitDurumu = yazar.KayitDurumu,
                               SilmeTarihi = yazar.SilmeTarihi
-                          }).ToList();
+                          }).OrderBy(x => x.YazarAdi).ToList();
             return result;
         }
         public async Task YazarSil(int id)

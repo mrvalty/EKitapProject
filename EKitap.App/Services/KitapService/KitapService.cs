@@ -29,8 +29,6 @@ namespace EKitap.App.Services.KitapService
             var kitapInfo = _context.Kitaplar.Where(x => x.KitapID == kitap.KitapID).FirstOrDefault();
             if (kitapInfo != null)
             {
-
-
                 kitapInfo.KitapAdi = kitap.KitapAdi;
                 kitapInfo.Aciklama = kitap.Aciklama;
                 kitapInfo.Fiyat = kitap.Fiyat;
