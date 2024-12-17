@@ -20,13 +20,26 @@ public class KategoriController : Controller
     [HttpGet]
     public async Task<IActionResult> KategoriListesi()
     {
+        //var result = _kategoriService.KategoriListele();
         var result = _kategoriService.GetAll();
+        //if (result != null)
+        //{
+        //    ViewData["KategoriListesi"] = result;
+        //}
+        return Json(result);
+    }
 
-        if (result != null)
-        {
-            ViewData["KategoriListesi"] = result;
-        }
+    [HttpPost]
+    public async Task<IActionResult> KategoriyeGoreKitapGetir(int id)
+    {
+        var result = _kategoriService.KategoriyeGoreKitap(id);
+        return Json(result);
+    }
 
+    [Route("Kategori/KategoriKitapListesi")]
+    public IActionResult KategoriKitapListesi()
+    {
         return View();
     }
+
 }

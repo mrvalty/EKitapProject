@@ -1,0 +1,69 @@
+﻿@using EKitap.App.Models.DTOs.Kategori
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = "KategoriKitapListesi";
+    Layout = "~/Views/Shared/head_foot.cshtml";
+}
+
+@{
+    var data = Context.Request.Query["kitaplar"];  // Query stringten veri çekme
+    var parsedData = JsonSerializer.Deserialize<List<KategoriIdListKitap_DTO>>(data);
+}
+
+<div class="container-fluid pt-5 pb-3">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">@parsedData.FirstOrDefault().KategoriAdi</span></h2>
+    <div class="row px-xl-5">
+        @foreach (var kitap in parsedData)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <div class="product-item bg-light mb-4">
+                    <div class="product-img position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="/KitapResimleri/@kitap.ResimDosyasi" style="height:400px;width:300px;" alt="">
+                        <div class="product-action">
+                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center py-4">
+                        <h5>@kitap.KitapAdi</h5>
+                        <a class="h6 text-decoration-none text-truncate" href="">Devamını Oku</a>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h5>@kitap.Fiyat TL</h5><h6 class="text-muted ml-2"><del>123.00</del></h6>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center mb-1">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@* <div class="container-fluid pt-5">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">@parsedData.FirstOrDefault().KategoriAdi</span></h2>
+    <div class="row px-xl-5 pb-3">
+        @foreach (var kitap in parsedData)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="/KitapResimleri/@kitap.ResimDosyasi" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>@kitap.KitapAdi</h6>
+                            <small class="text-body">@kitap.Fiyat TL</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+
+    </div>
+</div> *@
+

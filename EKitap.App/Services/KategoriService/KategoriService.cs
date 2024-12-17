@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EKitap.App.Models.DTOs.Kategori;
+using EKitap.Dom.Enums;
 using EKitap.Dom.Repositories;
 using EKitap.Domain.Models;
 using EKitap.Inf.DATA;
@@ -12,16 +13,19 @@ namespace EKitap.App.Services.KategoriService
         private readonly IMapper _mapper;
         EKitapSatısDB _context = new();
 
-        public KategoriService(IKategoriRepository kategoriRepository, IMapper mapper)
+        public KategoriService(IKategoriRepository kategoriRepository, IMapper mapper, EKitapSatısDB context)
         {
             _kategoriRepository = kategoriRepository;
             _mapper = mapper;
+            _context = context;
         }
 
         public async Task<List<Kategori>> GetAll()
         {
-            var kategoriler = _kategoriRepository.GetAll();
-            return kategoriler;
+            var result = _context.Kategoriler.ToList();
+
+            //var kategoriler = _kategoriRepository.GetAll();
+            return result;
         }
 
 
@@ -44,14 +48,43 @@ namespace EKitap.App.Services.KategoriService
                               GuncellemeTarihi = kategori.GuncellemeTarihi,
                               SilmeTarihi = kategori.SilmeTarihi,
                               KayitDurumu = kategori.KayitDurumu
-                          }).ToList();
+                          }).OrderBy(x => x.KategoriAdi).ToList();
 
             return result;
         }
 
         public async Task KategoriSil(int id)
         {
-            _kategoriRepository.SilAsync(id);
+
+            Kategori kategori = _context.Kategoriler.Where(x => x.KategoriID == id).First();
+            if (kategori != null)
+            {
+                kategori.SilmeTarihi = DateTime.Now;
+                kategori.KayitDurumu = KayitDurumu.Silindi;
+
+                _context.SaveChanges();
+            }
+            //_kategoriRepository.SilAsync(id);
+        }
+
+        public async Task<List<KategoriIdListKitap_DTO>> KategoriyeGoreKitap(int id)
+        {
+            var result = (from kategori in _context.Kategoriler
+                          join kitap in _context.Kitaplar on kategori.KategoriID equals kitap.KategoriID
+                          where kategori.KategoriID == id
+                          select new KategoriIdListKitap_DTO
+                          {
+                              KategoriID = kategori.KategoriID,
+                              Aciklama = kitap.Aciklama,
+                              Fiyat = kitap.Fiyat.ToString(),
+                              KitapAdi = kitap.KitapAdi,
+                              KitapID = kitap.KitapID,
+                              YazarAdi = kitap.Yazar.YazarAdi,
+                              ResimDosyasi = kitap.KitapResmi,
+                              KategoriAdi = kategori.KategoriAdi
+                          }).OrderByDescending(x => x.KitapAdi).ToList();
+
+            return result;
         }
     }
 }

@@ -6,5 +6,7 @@ namespace EKitap.App.Services.YazarService
     {
         Task<IEnumerable<Yazar_DTO>> TumMarkalarAsync();
         Task<List<Yazar_DTO>> YazarListele();
+
+        Task YazarSil(int id);
     }
 }
