@@ -1,0 +1,99 @@
+﻿@using EKitap.App.Models.DTOs.YayinEvi
+
+@{
+    ViewData["Title"] = "YayinEviListele";
+    Layout = "~/Areas/YonetimPanel/Views/Shared/_adminLayout.cshtml";
+}
+@model IEnumerable<YayinEvi_DTO>
+
+<form>
+    <div class="container-fluid px-4">
+        <div class="card mb-2 mt-4 border" style="background-color:darkgrey;border-radius:5px;">
+            <h3 class="">Yayın Evi Listesi</h3>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <div class="d-flex justify-content-end">
+                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#yayinEviEkleModal">
+                        <i class="fas fa-plus me-1"></i>
+                        Yayın Evi Ekle
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Yayın Evi Adı</th>
+                            <th>Eklenme Tarihi</th>
+                            <th>Silme Tarihi</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Yayın Evi Adı</th>
+                            <th>Eklenme Tarihi</th>
+                            <th>Silme Tarihi</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.YayinEviID</td>
+                                <td>@item.YayinEviAdi</td>
+                                <td>@item.EklenmeTarihi</td>
+                                <td>@item.SilmeTarihi</td>
+                                <td>
+                                   @*  <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateKitapModal">Güncelle</a> *@
+                                    <a class="btn btn-danger btn-sm sil-btn" data-id="@item.YayinEviID" id="btn1">Sil</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- Modal -->
+<div class="modal fade" id="yayinEviEkleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                Yazar Ekleme Formu
+            </div>
+            <div class="modal-body">
+                <div class="tabs-listing">
+                    <nav>
+                        <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <form asp-controller="YayinEvi" asp-action="YayinEviEkle" method="post">
+                            <div class="tab-pane fade active show" id="nav-sign-in" role="tabpanel"
+                                 aria-labelledby="nav-sign-in-tab">
+                                <div class="form-group py-3">
+                                    <label class="mb-2" for="sign-in">Yazar Adı</label>
+                                    <input type="text" minlength="2" name="KategoriAdi"
+                                           class="form-control w-100 rounded-3 " required>
+                                </div>
+                                <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Kaydet</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/admintemp/js/adminTempYayinEvi.js">
+    
+</script>

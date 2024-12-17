@@ -29,7 +29,7 @@ namespace EKitap.Inf.DATA
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Data source=MERVE;initial catalog=EKitapSatısDB;integrated security=true;trust server certificate=true");
+            optionsBuilder.UseSqlServer("Data source=Samet\\SQLEXPRESS;initial catalog=EKitapSatısDB;integrated security=true;trust server certificate=true");
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {

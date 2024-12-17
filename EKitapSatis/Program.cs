@@ -40,6 +40,7 @@ builder.Services.AddTransient<IYazarService, YazarService>();
 builder.Services.AddTransient<IYazarRepository, YazarRepository>();
 builder.Services.AddTransient<IKitapYazarRepository, KitapYazarRepository>();
 builder.Services.AddTransient<IYayinEviService, YayinEviService>();
+builder.Services.AddTransient<IYayinEviRepository, YayinEviRepository>();
 
 
 
